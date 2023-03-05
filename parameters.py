@@ -28,12 +28,12 @@ def parse_args():
         type=str,
         default='test',
     )
-    parser.add_argument("--filename_pat", type=str, default="behaviors_*.tsv")
+    parser.add_argument("--filename_pat", type=str, default="behaviors.tsv")
     parser.add_argument("--model_dir", type=str, default='./model')
     parser.add_argument("--batch_size", type=int, default=64)
     parser.add_argument("--npratio", type=int, default=1)
-    parser.add_argument("--enable_gpu", type=utils.str2bool, default=True)
-    parser.add_argument("--enable_hvd", type=utils.str2bool, default=True)
+    parser.add_argument("--enable_gpu", type=utils.str2bool, default=False)
+    parser.add_argument("--enable_hvd", type=utils.str2bool, default=False)
     parser.add_argument("--shuffle_buffer_size", type=int, default=10000)
     parser.add_argument("--num_workers", type=int, default=4)
     parser.add_argument("--filter_num", type=int, default=0)
@@ -134,6 +134,9 @@ def parse_args():
                         help="Pretrained config name or path if not the same as model_name")
     parser.add_argument("--tokenizer_name", default="../Turing/unilm2-base-uncased-vocab.txt", type=str,
                         help="Pretrained tokenizer name or path if not the same as model_name")
+
+    parser.add_argument("--market", default="MIND", type=str,
+                        help="main folder for the dataset.")
 
     args = parser.parse_args()
 

@@ -71,6 +71,7 @@ class StreamReader:
         dataset = dataset.batch(batch_size)
         dataset = dataset.prefetch(1)
         self.next_batch = dataset.make_one_shot_iterator().get_next()
+        # self.next_batch = tf.compat.v1.data.make_one_shot_iterator(dataset).get_next()
         self.session = None
 
     def _process_record(self, record):

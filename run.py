@@ -58,7 +58,7 @@ finetuneset={
 'classifier.bias'}
 def train(args):
     # Only support title Turing now
-    assert args.enable_hvd  # TODO
+    # assert args.enable_hvd  # TODO
     if args.enable_hvd:
         import horovod.torch as hvd
 
@@ -110,7 +110,7 @@ def train(args):
     if args.enable_gpu:
         model = model.cuda()
 
-    lr_scaler = hvd.local_size()
+    # lr_scaler = hvd.local_size()
     optimizer = optim.Adam(model.parameters(), lr=args.lr)
     if args.enable_hvd:
         hvd.broadcast_parameters(model.state_dict(), root_rank=0)
@@ -199,7 +199,7 @@ def train(args):
     dataloader.join()
 
 
-def test(args):
+def atest(args):
 
     if args.enable_hvd:
         import horovod.torch as hvd
@@ -378,4 +378,4 @@ if __name__ == "__main__":
     if 'train' in args.mode:
         train(args)
     if 'test' in args.mode:
-        test(args)
+        atest(args)
